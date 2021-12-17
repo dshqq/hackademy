@@ -1,12 +1,18 @@
 #include <stdio.h>
+#include <unistd.h>
 int my_puts(const char *s)
 {
-	int i = 0;
-	while(s[i] != '\0')
+	while(*s != '\0')
 	{
-		putchar(s[i]);
-		i++;
+		if (write(1,s++,1) == '\0')
+		{
+			return '\0';
+		}
+
 	}
-	putchar('\n');
+	if (write(1,"\n",1) == '\0')
+	{
+		return '\0';
+	}
 	return 0;
 }
