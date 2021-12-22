@@ -52,14 +52,13 @@ void *list_pop(node_t **head)
 {
 	node_t *current = *head;
 	node_t *previous = NULL;
-	if (current->next != NULL)
+	while (current->next != NULL)
 	{
 		previous = current;
 		current = current->next;
-
 	}
 	previous->next = NULL;
-	return current;
+	return 0;
 }
 void *list_shift(node_t **head)
 {
@@ -81,16 +80,14 @@ void *list_remove(node_t **head, node_t *ptr)
 {
 	node_t *current = *head;
 	node_t *previous = NULL;
-	node_t *node_next = current->next;
 	while(current != ptr)
 	{
-		current = current->next;
 		previous = current;
-		node_next = current->next->next;
+		current = current->next;
 	}
-	previous->next = node_next;
+	previous->next = current->next;
 	free(current);
-	return 0;
+	return 0;	
 }
 void list_visitor(node_t *head, void(*fp)(void *data))
 {
