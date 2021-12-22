@@ -1,23 +1,38 @@
+#include <stdio.h>
 #include <stdlib.h>
+
+
+int my_pow(int a, int b)
+{
+	if (a == 0)
+	{
+		return 1;
+	}
+	int k = b;
+	for (int i = 1; i < a; i++)
+	{
+		k *= b;
+	}
+	return k;
+}
+
 char *my_itoa(int nmb)
 {
-	if(nmb == 0)
-	{
-		return "0";
-	}
-	int count = 0;
-	char *buff = (char *)malloc(100*sizeof(char));
+	char *buff;
+        char *str = (char *)malloc(100*sizeof(char));
+	buff = str;
 	int my_int = nmb;
-	int my_int2 = nmb;
-	for (; my_int != 0; my_int /=10)
+	int count = 0;
+	for (; my_int != 1; my_int /= 10)
 	{
 		count++;
 	}
-	for ( int i = count-1; i >= -1; i--)
+	for (; count > -1; count--)
 	{
-		buff[i] = 48 + my_int2%10;
-		my_int2 = my_int2/10;
+		*buff++ = '0' + nmb/my_pow(count,10);
+		nmb %= my_pow(count,10);
+		
 	}
-	return buff;
-
+	*buff = '\0';
+	return str;
 }
