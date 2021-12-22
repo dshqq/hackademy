@@ -47,9 +47,9 @@ void print_node (node_t *node)
 {
 	if (node->left == NULL && node->right == NULL)
 	{
-		printf("%s\n",*node->left->data);
-		printf("%s\n",*node->data);
-		printf("%s\n",*node->right->data);
+		printf("%s\n",(node->left)->data);
+		printf("%s\n",node->data);
+		printf("%s\n",(node->right)->data);
 	}
 	else{
 		print_node(node->left);

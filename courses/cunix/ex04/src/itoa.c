@@ -18,7 +18,9 @@ int my_pow(int a, int b)
 
 char *my_itoa(int nmb)
 {
-	char *buff = (char *)malloc(100*(sizeof(char)));
+	char *buff;
+        char *str = (char *)malloc(100*(sizeof(char)));
+	buff = str;
 	int my_int = nmb;
 	int count = 0;
 	for (; my_int != 0; my_int /= 10)
@@ -27,8 +29,10 @@ char *my_itoa(int nmb)
 	}
 	for (; *buff && count > -1; count--)
 	{
-		*buff++ = '0' + nmb/my_pow(count,10);
+		*buff = '0' + nmb/my_pow(count,10);
 		nmb %= my_pow(count,10);
+		*buff++;
 	}
-	return buff;
+	*buff = '\0';
+	return str;
 }
