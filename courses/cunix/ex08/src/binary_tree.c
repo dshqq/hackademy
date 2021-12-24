@@ -12,12 +12,12 @@ typedef struct node {
 
 node_t *allocnode()
 {
-	node_t *root = (node_t *)malloc(sizeof(node_t));
-	root->key = NULL;
-	root->data = NULL;
-	root->left = NULL;
-	root->right = NULL;
-	return 0;
+	node_t *node = (node_t *)malloc(sizeof(node_t));
+	node->data = NULL;
+	node->key = NULL;
+	node->left = NULL;
+	node->right = NULL;
+	return (node);
 }
 
 node_t *insert(node_t *root, char *key, void *data)
@@ -47,23 +47,30 @@ void print_node (node_t *node)
 {
 	if (node->left == NULL && node->right == NULL)
 	{
-		printf("%s\n",(node->left)->data);
-		printf("%s\n",node->data);
-		printf("%s\n",(node->right)->data);
+		printf("%p\n",node->data);
+		printf("%s\n",node->key);
 	}
-	else{
-		print_node(node->left);
-		print_node(node->right);
+	else
+	{
+		if(node->left != NULL)
+		{
+			print_node(node->left);
+		}
+		if(node->right != NULL)
+		{
+			print_node(node->right);
+		}
 	}
 }
 
 void visit_tree(node_t *node, void (*fp)(node_t *root))
 {
+	node_t *root = root;
 	node_t *current = node;
 	while (current->left != root && current->right != root)
 	{
-		visit_tree(current->left, (*fp)(root));
-		visit_tree(current->right, (*fp)(root));
+		visit_tree(current->left, (*fp));
+		visit_tree(current->right, (*fp));
 	}
 	if (current->left == root)
 	{
@@ -77,10 +84,11 @@ void visit_tree(node_t *node, void (*fp)(node_t *root))
 
 void destroy_tree(node_t *node, void (*fdestroy)(node_t *root))
 {
+	node_t *root = root;
 	while (node->left != root && node->right != root)
 	{
-		destroy_tree(node->left, (*fdestroy)(root));
-		destroy_tree(node->right, (*fdestroy)(root));
+		destroy_tree(node->left, (*fdestroy));
+		destroy_tree(node->right, (*fdestroy));
 	}
 	if (node->left == root)
 	{
