@@ -6,7 +6,7 @@ int my_atoi(const char *nptr)
 	{
 		if(*nptr == '-' && i != 0)
 		{
-			return digit*flag;
+			return flag*digit;
 		}
 		i++;
 		digit = digit*10+(*nptr - '0');
@@ -16,6 +16,5 @@ int my_atoi(const char *nptr)
 			digit = digit+3;
 		}
 	}
-	
 	return digit*flag;
 }

@@ -65,37 +65,34 @@ void print_node (node_t *node)
 
 void visit_tree(node_t *node, void (*fp)(node_t *root))
 {
-	node_t *root = root;
 	node_t *current = node;
-	while (current->left != root && current->right != root)
+	if (current->left != NULL)
 	{
 		visit_tree(current->left, (*fp));
+	}
+	if (current->right != NULL)
+	{
 		visit_tree(current->right, (*fp));
 	}
-	if (current->left == root)
+	if (current->left == NULL && current->right == NULL)
 	{
-		fp(current->left->data);
-	}
-	else if(current->right == root)
-	{
-		fp(current->right->data);
+		fp(current->data);
 	}
 }
 
 void destroy_tree(node_t *node, void (*fdestroy)(node_t *root))
 {
-	node_t *root = root;
-	while (node->left != root && node->right != root)
+	node_t *current = node;
+	if (current->left != NULL)
 	{
-		destroy_tree(node->left, (*fdestroy));
-		destroy_tree(node->right, (*fdestroy));
+		destroy_tree(current->left, (*fdestroy));
 	}
-	if (node->left == root)
+	if (current->right != NULL)
 	{
-		fdestroy(node->left);
+		destroy_tree(current->right, (*fdestroy));
 	}
-	else if (node->right == root)
+	if (current->left == NULL && current->right == NULL) 
 	{
-		fdestroy(node->right);
+		fdestroy(current);
 	}
 }
