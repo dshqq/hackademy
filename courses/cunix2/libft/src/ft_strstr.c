@@ -1,9 +1,11 @@
+#include <stddef.h>
+
 char *ft_strstr (const char *strB, const char *strA)
 {
 	while (*strB != '\0')
 	{
-		char *newA = strA;
-		char *newB = strB;
+		const char *newA = strA;
+		const char *newB = strB;
 		if (*newB == *newA)
 		{
 			while(*newA != '\0' && *newB == *newA)

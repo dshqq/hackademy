@@ -1,5 +1,4 @@
-
-int ft_abs (int i)
+int ft_abs(int i)
 {
 	if (i < 0)
 	{
