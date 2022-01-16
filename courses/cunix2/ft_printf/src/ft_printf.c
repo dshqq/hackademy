@@ -28,11 +28,11 @@ int my_len (int k)
 		return 1;
 	}
 	int flag = 0;
+	int count = 0;
 	if (k < 0)
 	{
 		flag++;
 	}
-	int count = 0;
 	while (k != 0)
 	{
 		k /= 10;
@@ -81,7 +81,7 @@ char *my_itoa (int nmb)
 	{
 		count++;
 	}
-	char *str = (char *)malloc(count+flag*sizeof(char));
+	char *str = (char *)malloc((count+flag)*sizeof(char));
 	buff = str;
 	if (flag == 1)
 	{
@@ -133,6 +133,7 @@ void ft_printf (char* format, ...)
 				  if(s == NULL)
 				  {
 					  write(1, "(null)", 6);
+					  break;
 				  }
 				  while (*s != '\0')
 				  {
@@ -244,6 +245,7 @@ void ft_printf (char* format, ...)
 							    while(k-6 > 0)
 							    {
 								    write(1, " ", 1);
+								    k--; 
 							    }
 							    write(1, "(null)", 6);
 							    break;
