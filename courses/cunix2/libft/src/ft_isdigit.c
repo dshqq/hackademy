@@ -1,4 +1,3 @@
-#include "../libft.h"
 #include <stddef.h>
 
 int ft_isdigit (int ch)

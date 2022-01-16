@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-div_t div (int num, int den)
+div_t ft_div (int num, int den)
 {
 	div_t division;
 	division.quot = num/den;

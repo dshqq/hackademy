@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-void *ft_memcmp (const void *arr1, const void *arr2, size_t n)
+int ft_memcmp (const void *arr1, const void *arr2, size_t n)
 {
 	const char *new_1 = arr1;
 	const char *new_2 = arr2;
@@ -8,11 +8,11 @@ void *ft_memcmp (const void *arr1, const void *arr2, size_t n)
 	{
 		if (*new_1 > *new_2)
 		{
-			return (void *)1;
+			return 1;
 		}
 		else if (*new_1 < *new_2)
 		{
-			return (void *)-1;
+			return (-1);
 		}
 		new_1++;
 		new_2++;

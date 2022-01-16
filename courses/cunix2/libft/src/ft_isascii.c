@@ -1,7 +1,6 @@
-#include "../libft.h"
 #include <stddef.h>
 
-int ft_asascii (int ch)
+int ft_isascii (int ch)
 {
 	if ((int)ch >= 0 && (int)ch <= 127)
 	{

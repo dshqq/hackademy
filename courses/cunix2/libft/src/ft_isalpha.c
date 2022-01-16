@@ -1,7 +1,6 @@
-#include "../libft.h"
 #include <stddef.h>
 
-int isalpha (int ch)
+int ft_isalpha (int ch)
 {
 	if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
 	{
