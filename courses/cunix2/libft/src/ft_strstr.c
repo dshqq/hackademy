@@ -1,11 +1,11 @@
 #include <stddef.h>
 
-char *ft_strstr (const char *strB, const char *strA)
+char *ft_strstr ( char *strB, char *strA)
 {
 	while (*strB != '\0')
 	{
-		const char *newA = strA;
-		const char *newB = strB;
+		char *newA = strA;
+		char *newB = strB;
 		if (*newB == *newA)
 		{
 			while(*newA != '\0' && *newB == *newA)
@@ -15,7 +15,7 @@ char *ft_strstr (const char *strB, const char *strA)
 			}
 			if (*newA == '\0')
 			{
-				return (char*)strB;
+				return strB;
 			}
 		}
 		strB++;
