@@ -86,6 +86,7 @@ void ft_printf (char* format, ...)
 				  char *ch_m = my_itoa(m);
 				  write(1, ch_m, my_len(m));
 				  break;
+
 			case '1':
 			case '2':
 			case '3':

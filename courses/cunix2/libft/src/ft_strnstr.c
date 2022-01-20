@@ -6,7 +6,9 @@ char *ft_strnstr (char *strB, char *strA, size_t len)
 	{
 		return strB;
 	}
+
 	size_t count = 1;
+
 	while (*strB != '\0' && count <= len)
 	{
 		char *newA = strA;
@@ -27,5 +29,6 @@ char *ft_strnstr (char *strB, char *strA, size_t len)
 		strB++;
 		count++;
 	}
+
 	return NULL;
 }
