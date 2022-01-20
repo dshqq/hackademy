@@ -1,113 +1,16 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
-
-int my_strlen(char *str)
-{
-	int count;
-	for (count = 0; *str != '\0'; str++)
-	{
-		++count;
-	}
-	return count;
-}
-
-int my_isdigit (int ch)
-{
-	if (ch >= '0' && ch <= '9')
-	{
-		return 1;
-	}
-	return 0;
-}
-
-int my_len (int k)
-{
-	if (k == 0)
-	{
-		return 1;
-	}
-	int flag = 0;
-	int count = 0;
-	if (k < 0)
-	{
-		flag++;
-	}
-	while (k != 0)
-	{
-		k /= 10;
-		count++;
-	}
-	return count+flag;
-}
-
-int my_atoi (char nptr)
-{
-	int digit = 0;
-	digit = nptr - '0';
-	return digit;
-}
-
-int my_pow (int a, int b)
-{
-	if (a == 0)
-	{
-		return 1;
-	}
-	int k = b;
-	for (int i = 1; i < a; i++)
-	{
-		k *= b;
-	}
-	return k;
-}
-
-char *my_itoa (int nmb)
-{
-	char *buff;
-	int count = -1;
-	int flag = 0;
-	if (nmb < 0)
-	{
-		flag++;
-		nmb *= -1;
-	}
-	if (nmb == 0)
-	{
-		count = 1;
-	}
-	int my_int = nmb;
-	for (; my_int > 0; my_int /= 10)
-	{
-		count++;
-	}
-	char *str = (char *)malloc((count+flag)*sizeof(char));
-	buff = str;
-	if (flag == 1)
-	{
-		*buff++ = '-';
-	}
-	if (nmb == 0)
-	{
-		*buff = '0';
-		return str;
-	}
-	for (; count > -1; count--)
-	{
-		*buff++ = '0' + nmb/my_pow(count, 10);
-		nmb %= my_pow(count,10);
-	}
-	*buff = '\0';	
-	return str;
-}
+#include "print.h"
+#include "case.h"
 
 void ft_printf (char* format, ...)
 {
 	char *my_arg;
-	int c, i, d, o, sp, m, k, l;
+	int c, i, d, o, sp, m, l;
 	char *s, *ch;
 	va_list arg;
-	int t, p, z = 0;
+	int t = 0, p = 0, z = 0, k = 0;
 	va_start(arg, format);
 
 	for(my_arg = format; ; my_arg++)
@@ -130,15 +33,7 @@ void ft_printf (char* format, ...)
 				  break;
 
 			case 's': s = va_arg(arg, char *);
-				  if(s == NULL)
-				  {
-					  write(1, "(null)", 6);
-					  break;
-				  }
-				  while (*s != '\0')
-				  {
-					  write(1, s++, 1);
-				  }
+				  case_s(s);
 				  break;
 
 			case 'i':
@@ -151,63 +46,38 @@ void ft_printf (char* format, ...)
 				  break;
 
 			case '0': my_arg++;
+				  //loop(my_arg, t);
 				  while (my_isdigit(*my_arg))
 				  {
 					  t = t*10 + my_atoi(*my_arg++);
 				  }
-				  o = va_arg(arg, int);
-				  if(o < 0)
-				  {
-					  write(1, "-", 1);
-					  o *= -1;
-					  t--;
-				  }
 
-				  char *ch_o = my_itoa(o);
-				  while (t-- > my_len(o))
-				  {
-					  write(1, "0", 1);
-				  }
-				  write(1, ch_o, my_strlen(ch_o));
+				  o = va_arg(arg, int);
+				  case_zero(o, t);
 				  break;
 
 			case ' ': my_arg++;
+				  //loop(my_arg, p);
 				  while (my_isdigit(*my_arg))
 				  {
-					  p = p*10 + my_atoi(*my_arg);
-					  my_arg++;
+					  p = p*10 + my_atoi(*my_arg++);
 				  }
+
 				  sp = va_arg(arg, int);
-				  char *ch_sp = my_itoa(sp);
-				  if (p == 0 && sp > 0)
-				  {
-					  write(1, " ", 1);
-			          }
-				  while (p-- > my_len(sp))
-				  {
-					  write(1, " ", 1);
-				  }
-				  write(1, ch_sp, my_strlen(ch_sp));
+				  case_space(sp, p);
 				  break;
 
 			case '+': my_arg++;
 				  m = va_arg(arg, int);
-				  if(m >= 0)
-				  {
-					  write(1, "+", 1);
-				  }
-				  else if (m < 0)
-				  {
-					  write(1, "-", 1);
-					  m *= -1;
-				  }
-				 
+				  case_plus(m);
 				  if(*my_arg == '0')
 				  {
+					  //loop(my_arg, z);
 					  while (my_isdigit(*my_arg))
 					  {
 						  z = z*10 + my_atoi(*my_arg++);
 					  }
+
 					  while (--z > my_len(m))
 					  {
 						  write(1, "0", 1);
@@ -224,48 +94,27 @@ void ft_printf (char* format, ...)
 			case '6':
 			case '7':
 			case '8':
-			case '9': while (my_isdigit (*my_arg))
+			case '9': //loop(my_arg, k);
+				  while (my_isdigit(*my_arg))
 				  {
 					  k = k*10 + my_atoi(*my_arg++);
 				  }
+
 				  switch (*my_arg)
 				  {
 					  case 'd':
 					  case 'i': i = va_arg(arg, int);
-						    char *ch_i = my_itoa(i);
-						    while (k-- > my_len(i))
-						    {
-							    write (1, " ", 1);
-						    }
-						    write(1, ch_i, my_len(i));
+						    case_digit_i(i, k);
 						    break;
+
 					  case 's': ch = va_arg(arg, char *);
-						    if(ch == NULL)
-						    {
-							    while(k-6 > 0)
-							    {
-								    write(1, " ", 1);
-								    k--; 
-							    }
-							    write(1, "(null)", 6);
-							    break;
-						    }
-						    while (k-- > my_strlen(ch))
-						    {
-							    write(1, " ", 1);
-						    }
-						    while (*ch != '\0')
-						    {
-							    write (1, ch++, 1);
-						    }
+						    case_digit_s(ch, k);
 						    break;
+
 					  case 'c': l = va_arg(arg, int);
-						    while (k-- > 1)
-						    {
-							    write(1, " ", 1);
-						    }
-						    write(1, &l, 1);
+						    case_digit_c(l, k);
 						    break;
+
 					  case '%' : write(1, "%", 1);
 						     break;
 				  }

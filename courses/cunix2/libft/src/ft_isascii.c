@@ -2,7 +2,7 @@
 
 int ft_isascii (int ch)
 {
-	if ((int)ch >= 0 && (int)ch <= 127)
+	if (ch >= 0 && ch <= 127)
 	{
 		return 1;
 	}
