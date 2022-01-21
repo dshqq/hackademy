@@ -3,10 +3,10 @@
 #include <stdlib.h>
 
 
-div_t ft_div (int num, int den)
+div_t ft_div(int num, int den)
 {
-	div_t division;
-	division.quot = num/den;
-	division.rem = num%den;
-	return division;
+    div_t division;
+    division.quot = num / den;
+    division.rem = num % den;
+    return division;
 }

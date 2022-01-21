@@ -1,10 +1,9 @@
-#include <stddef.h>
-
-int ft_isdigit (int ch)
+int ft_isdigit(int ch)
 {
-	if (ch >= '0' && ch <= '9')
-	{
-		return 1;
-	}
-	return 0;
+    if (ch >= '0' && ch <= '9')
+    {
+        return 1;
+    }
+
+    return 0;
 }

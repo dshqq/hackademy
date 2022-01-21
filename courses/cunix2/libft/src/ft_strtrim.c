@@ -3,46 +3,48 @@
 
 unsigned int my_strlen(char *str)
 {
-	int count;
+    int count;
 
-	for (count = 0; *str != '\0'; str++)
-	{
-		count++;
-	}
-	return count;
+    for (count = 0; *str != '\0'; str++)
+    {
+        count++;
+    }
+
+    return count;
 }
 
 
-char *ft_strtrim (const char *s)
+char *ft_strtrim(const char *s)
 {
-	char *s1 = (char *)s;
-	int i = 0;
+    char *s1 = (char *)s;
+    int i = 0;
 
-	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-	{
-		s1++;
-		i++;
-	}
+    while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+    {
+        s1++;
+        i++;
+    }
 
-	int k = my_strlen(s1);
+    int k = my_strlen(s1);
 
-	while (s1[k-1] == ' ' || s1[k-1] == '\n' || s1[k-1] == '\n')
-	{
-		k--;
-	}
+    while (s1[k - 1] == ' ' || s1[k - 1] == '\n' || s1[k - 1] == '\n')
+    {
+        k--;
+    }
 
-	if (k == 0)
-	{
-		return NULL;
-	}
+    if (k == 0)
+    {
+        return NULL;
+    }
 
-	char *fresh = (char *)(malloc(k+1));
+    char *fresh = (char *)(malloc(k + 1));
 
-	for (int j = 0; j < k; j++)
-	{
-		fresh[j] = s1[j];
-	}
+    for (int j = 0; j < k; j++)
+    {
+        fresh[j] = s1[j];
+    }
 
-	fresh[k] = '\0';
-	return fresh;
+    fresh[k] = '\0';
+
+    return fresh;
 }

@@ -1,24 +1,28 @@
-char *ft_strstr ( char *strB, char *strA)
+#include <stddef.h>
+
+char *ft_strstr(char *strB, char *strA)
 {
-	while (*strB != '\0')
-	{
-		char *newA = strA;
-		char *newB = strB;
+    while (*strB != '\0')
+    {
+        char *newA = strA;
+        char *newB = strB;
 
-		if (*newB == *newA)
-		{
-			while(*newA != '\0' && *newB == *newA)
-			{
-				newB++;
-				newA++;
-			}
-			if (*newA == '\0')
-			{
-				return strB;
-			}
-		}
-		strB++;
-	}
+        if (*newB == *newA)
+        {
+            while (*newA != '\0' && *newB == *newA)
+            {
+                newB++;
+                newA++;
+            }
 
-	return NULL;
+            if (*newA == '\0')
+            {
+                return strB;
+            }
+        }
+
+        strB++;
+    }
+
+    return NULL;
 }

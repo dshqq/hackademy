@@ -3,90 +3,98 @@
 
 unsigned int my_strlen(const char *str)
 {
-	int count;
+    int count;
 
-	for (count = 0; *str != '\0'; str++)
-	{
-		count++;
-	}
+    for (count = 0; *str != '\0'; str++)
+    {
+        count++;
+    }
 
-	return count;
+    return count;
 }
 
-char **ft_strsplit (char const *s, char c)
+char **ft_strsplit(char const *s, char c)
 {
-	int flag = 0, k = 0;
-	char const *s1 = s, *s2 = s;
+    int flag = 0, k = 0;
+    char const *s1 = s, *s2 = s;
 
-	while (*s1 != '\0')
-	{
-		if (*s1 != c && flag == 0)
-		{
-			flag = 1;
-			k++;
-		}
-		if (*s1 == c && flag == 1)
-		{
-			flag = 0;
-		}
-		s1++;
-	}
+    while (*s1 != '\0')
+    {
+        if (*s1 != c && flag == 0)
+        {
+            flag = 1;
+            k++;
+        }
 
-	int *words = (int *)malloc(k*sizeof(int));
-	int w, len = 0;
-	flag = 0;
+        if (*s1 == c && flag == 1)
+        {
+            flag = 0;
+        }
 
-	while (*s2 != '\0')
-	{
-		if (*s2 != c && flag == 1)
-		{
-			len++;
-		}
-		if (*s2 != c && flag == 0)
-		{
-			flag = 1;
-			len++;
-		}
-		if (*s2 == c && flag == 1)
-		{
-			flag = 0;
-			words[w] = len;
-			len = 0;
-			w++;
-		}
-		s2++;
-	}
+        s1++;
+    }
 
-	if (k == 0)
-	{
-		return NULL;
-	}
+    int *words = (int *)malloc(k * sizeof(int));
+    int w = 0, len = 0;
+    flag = 0;
 
-	char **fresh = (char **)malloc(k*sizeof(char *));
-	int m = 0, n = 0;
+    while (*s2 != '\0')
+    {
+        if (*s2 != c && flag == 1)
+        {
+            len++;
+        }
 
-	while (*s != '\0')
-	{
-		if (*s != c && flag == 1)
-		{
-			fresh[n][m] = *s;
-			m++;
-		}
-		if (*s != c && flag == 0)
-		{
-			fresh[n] = (char *)malloc(words[n]*sizeof(char));
-			flag = 1;
-			fresh[n][m] = *s;
-			m++;
-		}
-		if (*s == c && flag == 1)
-		{
-			flag = 0;
-			m = 0;
-			n++;
-		}
-		s++;
-	}
+        if (*s2 != c && flag == 0)
+        {
+            flag = 1;
+            len++;
+        }
 
-	return fresh;
+        if (*s2 == c && flag == 1)
+        {
+            flag = 0;
+            words[w] = len;
+            len = 0;
+            w++;
+        }
+
+        s2++;
+    }
+
+    if (k == 0)
+    {
+        return NULL;
+    }
+
+    char **fresh = (char **)malloc(k * sizeof(char *));
+    int m = 0, n = 0;
+
+    while (*s != '\0')
+    {
+        if (*s != c && flag == 1)
+        {
+            fresh[n][m] = *s;
+            m++;
+        }
+
+        if (*s != c && flag == 0)
+        {
+            fresh[n] = (char *)malloc(words[n] * sizeof(char));
+            flag = 1;
+            fresh[n][m] = *s;
+            m++;
+        }
+
+        if (*s == c && flag == 1)
+        {
+            flag = 0;
+            m = 0;
+            n++;
+        }
+
+        s++;
+    }
+
+    return fresh;
 }
